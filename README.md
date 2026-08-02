@@ -4,9 +4,6 @@ A 3D audio visualizer that turns any song into a glowing, reactive ocean. Built 
 
 ![type](https://img.shields.io/badge/type-single--file%20HTML-blue) ![three.js](https://img.shields.io/badge/three.js-r128-black) ![license](https://img.shields.io/badge/license-MIT-green)
 
-## Preview
-
-A wireframe grid ripples and glows in real time as your music plays — bass drives the swell and color shift, treble adds surface "chop," and hits trigger expanding ripple waves across the surface.
 
 ## Features
 
@@ -25,7 +22,7 @@ A wireframe grid ripples and glows in real time as your music plays — bass dri
 
 No installation or build tools required.
 
-1. Download `ocean-grid.html`
+1. Download `index.html`
 2. Open it in a modern browser (Chrome, Edge, or Firefox recommended)
 3. Click **🎵 Choose a song**, or drag an audio file anywhere onto the page
 
