@@ -1,44 +1,39 @@
-# 🌊 Audio Ocean
+# Audio Ocean
 
-A 3D audio visualizer that turns any song into a glowing, reactive ocean. Built with [Three.js](https://threejs.org/) and the Web Audio API — no build step, no dependencies to install, just open the HTML file in a browser.
+A 3D audio visualizer that turns a song into a glowing, moving ocean. Built with Three.js and the Web Audio API. No build step, no npm install — just open the HTML file.
 
-![type](https://img.shields.io/badge/type-single--file%20HTML-blue) ![three.js](https://img.shields.io/badge/three.js-r128-black) ![license](https://img.shields.io/badge/license-MIT-green)
+![type](https://img.shields.io/badge/type-single--file%20HTML-blue)
+![three.js](https://img.shields.io/badge/three.js-r128-black)
+![license](https://img.shields.io/badge/license-MIT-green)
 
+## What it does
 
-## Features
+Drop in an audio file and a wireframe plane turns into an ocean that reacts to the music in real time. Bass hits push the surface up and spawn ripples, treble adds fine surface detail, and the colors shift from deep indigo in the troughs to cyan and then hot pink at the peaks.
 
-- 🎧 **Real-time audio reactivity** — bass and treble frequencies drive wave height, ripple triggers, and color
-- 🌈 **Dynamic color gradient** — deep indigo troughs rise through cyan crests into hot pink peaks
-- 💧 **Beat-triggered ripples** — bass hits spawn expanding rings across the grid
-- 🖱️ **Orbit camera controls** — drag to rotate, scroll to zoom, gentle auto-rotate when idle
-- 📁 **Drag-and-drop or file picker** — load any local audio file
-- 🎵 **Track info display** — song title and artist parsed automatically from the filename
-- ⏱️ **Seek bar** — scrub to any point in the track
-- 🔊 **Volume slider**
-- ⌨️ **Spacebar shortcut** — play/pause without touching the mouse
-- ✨ **Starfield background** with soft fog for depth
+- Bass and treble frequencies drive wave height and color
+- Beat detection triggers expanding ripple rings
+- Orbit camera — drag to rotate, scroll to zoom, auto-rotates when idle
+- Drag-and-drop or file picker for loading audio
+- Track title/artist parsed from the filename
+- Seek bar, volume slider, spacebar to play/pause
+- Starfield background for depth
 
-## Getting Started
+## Getting started
 
-No installation or build tools required.
+Nothing to install.
 
 1. Download `index.html`
-2. Open it in a modern browser (Chrome, Edge, or Firefox recommended)
-3. Click **🎵 Choose a song**, or drag an audio file anywhere onto the page
+2. Open it in Chrome, Edge, or Firefox
+3. Click "Choose a song," or just drag an audio file onto the page
 
-> **Tip:** For the best-looking result, name your files `Artist - Title.mp3` — the app parses this pattern to display a clean track title and artist.
+Name your files like `Artist - Title.mp3` if you want the title/artist display to parse correctly.
 
-### Run locally with a simple server (optional)
+If playback doesn't start when you open the file directly, some browsers block local file access for audio decoding. Serve it instead:
 
-Some browsers restrict local file access for audio decoding. If playback doesn't start, serve the file instead of opening it directly:
-
-```bash
-# Python 3
-python -m http.server 8000
-
-# then visit
-http://localhost:8000/ocean-grid.html
 ```
+python -m http.server 8000
+```
+then open `http://localhost:8000/index.html`
 
 ## Controls
 
@@ -48,23 +43,23 @@ http://localhost:8000/ocean-grid.html
 | Zoom | Scroll |
 | Play / Pause | Spacebar or button |
 | Seek | Drag the progress bar |
-| Volume | Volume slider |
-| Load a track | Choose a song button, or drag & drop a file anywhere |
+| Volume | Slider |
+| Load a track | Button, or drag & drop anywhere |
 
-## How It Works
+## How it works
 
-- The "ocean" is a `THREE.PlaneGeometry` wireframe whose vertices are displaced vertically each frame based on:
-  - an idle ambient wave (so it never sits perfectly still)
-  - smoothed bass energy (broad swell)
-  - smoothed treble energy (fine surface chop)
-  - active ripple rings, spawned when a bass "hit" is detected against a rolling average
-- Vertex colors are interpolated per-frame from wave height: dark indigo → cyan → hot pink
-- Audio is analyzed with the Web Audio API's `AnalyserNode`, splitting the frequency spectrum into bass and treble bands
+The ocean is a `THREE.PlaneGeometry` wireframe. Every frame, each vertex gets pushed up or down based on a few things added together: a constant idle wave so it's never completely still, smoothed bass energy for the big swells, smoothed treble for the finer chop on top, and any active ripple rings from a detected bass hit.
 
-## Browser Support
+Bass hits are detected by comparing the current bass energy against a rolling average — when it spikes past that, a new ripple spawns.
 
-Requires WebGL and the Web Audio API — works in all current versions of Chrome, Firefox, Edge, and Safari.
+Vertex colors are calculated from wave height each frame, interpolating indigo → cyan → pink.
+
+Audio analysis uses the Web Audio API's `AnalyserNode`, splitting the frequency spectrum into bass and treble bands.
+
+## Browser support
+
+Needs WebGL and the Web Audio API. Works fine on current Chrome, Firefox, Edge, and Safari.
 
 ## License
 
-MIT — free to use, modify, and share.
+MIT — use it, modify it, ship it, whatever.
